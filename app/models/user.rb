@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  has_many :tasks
+  has_many :collaborations
+  has_many :cards, through: :collaborations
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -8,10 +12,6 @@ class User < ApplicationRecord
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
-  def set_default_role
-    self.role ||= :user
-  end
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -19,4 +19,8 @@ class User < ApplicationRecord
     end      
   end
 
+  private
+    def set_default_role
+      self.role ||= :user
+    end
 end
