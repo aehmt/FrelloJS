@@ -13,7 +13,12 @@
       <%= link_to("Sign up", new_user_registration_path) %>
       <%= link_to("Sign in", new_user_registration_path) %>
       <%= link_to('Sign out', destroy_user_session_path, method: :get) %>
+      <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
     </nav>
+
+    
+welcome
+<h2><%= "Hello, #{current_user.email}" if current_user %></h2>
 
     <% flash.each do |name, msg| -%>
       <%= content_tag :div, msg, class: name %>

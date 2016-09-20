@@ -1,7 +1,8 @@
 class User < ApplicationRecord
-  has_many :tasks
+  has_many :boards
   has_many :collaborations
   has_many :cards, through: :collaborations
+  has_many :feeds
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
