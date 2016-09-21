@@ -8,9 +8,16 @@ Tasks<br>
 
   <ol>
   <% task.cards.each do |card| %>
-    <li><%= card.content %></li>
+    <li class="<%= 'checked_card' if card.checked %>"><%= card.content %> <%= button_to "check", card_path(card), method: 'patch', params: {update_type: "toggle_check"} %></li>
   <% end %>
   </ol>
 
   <%= render 'cards/form', :task => task %>
 <% end %>
+
+
+<style>
+  .checked_card {
+    text-decoration: line-through;
+  }
+</style>

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'profile#home'
 
-  # resources :boards
   resources :tasks, only: [:create, :update]
   resources :cards, only: [:create, :update]
   
