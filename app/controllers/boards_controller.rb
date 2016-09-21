@@ -8,7 +8,8 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @tasks = current_user.tasks
+    @tasks = @board.tasks
+    @new_task = Task.new
     # @feeds
   end
 

@@ -1,14 +1,4 @@
 class CardsController < ApplicationController
-  
-  # def index
-  #   @cards = current_user.cards
-  #   show_home
-  # end
-
-  # def show
-  #   @card = Task.find_by(id: params[:id])
-  # end
-
   def create
     @card = Card.new(card_params)
     if @card.save
@@ -17,11 +7,6 @@ class CardsController < ApplicationController
       return render :new
     end
   end
-
-#   def new
-#     @card = Task.new
-#     3.times {@cards = @card.cards.build} 
-#   end
 
   def update
     @card = Card.find_by(id: params[:id])

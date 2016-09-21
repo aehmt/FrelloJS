@@ -1,1 +1,16 @@
 Board: <%= @board.name %>
+
+<%= render 'tasks/form' %>
+
+Tasks<br>
+<% @board.tasks.each do |task| %>
+  <li><%= task.title %></li>
+
+  <ol>
+  <% task.cards.each do |card| %>
+    <li><%= card.content %></li>
+  <% end %>
+  </ol>
+
+  <%= render 'cards/form' %>
+<% end %>
