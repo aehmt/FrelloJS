@@ -11,7 +11,6 @@ class BoardsController < ApplicationController
   end
 
   def create
-    binding.pry
     @board = current_user.boards.build(board_params)
     if @board.save
       redirect_to user_boards_path(current_user)
