@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'pry'
 gem "omniauth-google-oauth2"
 gem 'omniauth'
 gem 'omniauth-facebook'

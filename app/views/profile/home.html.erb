@@ -1,1 +1,11 @@
 home
+
+<%= form_for [current_user, @new_board] do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Add' %>
+<% end %>
+
+
+<% @boards.each do |board| %>
+  <p><%= board.name %></p>
+<% end %>
