@@ -1,6 +1,5 @@
 <%= form_for @new_task do |f| %>
 
-
   <% if @new_task.errors.any? %>
     <h2><%= pluralize(@new_task.errors.count, "error") %> prohibited this task from being saved:</h2>
     <ul>
@@ -10,7 +9,6 @@
     </ul>
   <% end %>
 
-  <%= f.label :title %>
   <%= f.hidden_field :board_id, value: @board.id %>
   <%= f.text_field :title, required: 'required' %>
   <%= f.submit %>

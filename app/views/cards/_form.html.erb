@@ -1,0 +1,17 @@
+<%= form_for @card do |f| %>
+
+  <% if @card.errors.any? %>
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+
+    <ul>
+      <% @card.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content, required: 'required' %>
+
+<%= f.submit %>
+<% end %>
