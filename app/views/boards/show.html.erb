@@ -1,6 +1,6 @@
 Board: <%= @board.name %>
 
-<%= render 'tasks/form' %>
+<%= render 'tasks/form', board: @board %>
 
 Tasks<br>
 <% @board.tasks.each do |task| %>
@@ -12,5 +12,5 @@ Tasks<br>
   <% end %>
   </ol>
 
-  <%= render 'cards/form' %>
+  <%= render 'cards/form', :task => task %>
 <% end %>

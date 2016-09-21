@@ -1,16 +1,16 @@
-<%= form_for @card do |f| %>
+<%= form_for @new_card do |f| %>
 
-  <% if @card.errors.any? %>
-      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+  <% if @new_card.errors.any? %>
+      <h2><%= pluralize(@new_card.errors.count, "error") %> prohibited this card from being saved:</h2>
 
     <ul>
-      <% @card.errors.full_messages.each do |msg| %>
+      <% @new_card.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
   <% end %>
 
-  <%= f.label :content %>
+  <%= f.hidden_field :task_id, value: task.id %>
   <%= f.text_field :content, required: 'required' %>
 
 <%= f.submit %>

@@ -17,6 +17,6 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:content)
+    params.require(:card).permit(:content, :task_id)
   end
 end

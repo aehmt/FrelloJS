@@ -9,7 +9,7 @@
     </ul>
   <% end %>
 
-  <%= f.hidden_field :board_id, value: @board.id %>
+  <%= f.hidden_field :board_id, value: board.id %>
   <%= f.text_field :title, required: 'required' %>
   <%= f.submit %>
 <% end %>

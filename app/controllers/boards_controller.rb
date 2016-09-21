@@ -10,6 +10,7 @@ class BoardsController < ApplicationController
   def show
     @tasks = @board.tasks
     @new_task = Task.new
+    @new_card = Card.new
     # @feeds
   end
 
