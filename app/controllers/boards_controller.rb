@@ -8,6 +8,8 @@ class BoardsController < ApplicationController
   end
 
   def show
+    @tasks = current_user.tasks
+    # @feeds
   end
 
   def create
@@ -23,24 +25,6 @@ class BoardsController < ApplicationController
     @board.update(board_params)
     redirect_to root_path
   end
-
-  # after_action :show_home
-
-
-  # def show
-  # end
-
-  # def create
-  #   @board = Board.new( board_params )
-  #   if @board.save
-  #     redirect_to board_path(@board)
-  #   end
-  #   "fuck"
-  # end
-
-
-
-
 
   private
     def board_params
