@@ -11,18 +11,8 @@
     </ul>
   <% end %>
 
-
-
   <%= f.label :title %>
-  <%= f.text_field :title %>
-
-
-  <%= f.fields_for(:cards) do |card_form| %>
-    <br />
-    <%= card_form.label :content %>
-    <%= card_form.text_field :content %>
-  <% end %>
-  
+  <%= f.text_field :title, required: 'required' %>
 
 <%= f.submit %>
 <% end %>
