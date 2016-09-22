@@ -1,4 +1,4 @@
-<div class="board"">
+<div class="board" style="background: <%= @board.color %>">
   Board: <%= @board.name %>
 
   <%= render 'lists/form', board: @board %>

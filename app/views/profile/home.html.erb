@@ -8,5 +8,27 @@ home
 
 
 <% @boards.each do |board| %>
-  <p style="background: <%= @board.color if @board %>"><%= link_to board.name, user_board_path(@user, board) %></p>
+  <a href="/users/<%= @user.id %>/boards/<%= board.id %>">
+    <div class="board-tile" style="background: <%= board.color %>">
+        <p><%= board.name %></p>
+    </div>
+  </a>
 <% end %>
+
+
+<style type="text/css">
+  .board-tile {
+    display: inline-block;
+    border-radius: 2px;
+    width: 230px;
+    height: 70px;
+    padding: 10px;
+    margin: 10px;
+  }
+  .board-tile p {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    text-align: center;
+  }
+</style>
