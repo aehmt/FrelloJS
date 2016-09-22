@@ -2,7 +2,6 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-
     @list = List.new(list_params)
     if @list.save
       binding.pry
@@ -22,6 +21,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:title, :board_id)
+    params.require(:list).permit(:title, :board_id, :duedate)
   end
 end
