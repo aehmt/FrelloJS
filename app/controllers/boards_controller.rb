@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
 
   def show
     @lists = @board.lists
-    @new_list = List.new
+    @new_list = List.new(duedate: Time.now)
     @new_card = Card.new
     @feeds = @board.feeds.reverse
     # @feeds
