@@ -5,7 +5,6 @@ class ListsController < ApplicationController
 
     @list = List.new(list_params)
     if @list.save
-      binding.pry
       Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} created the list: #{@list.title}")
     end
       redirect_to user_board_path(current_user, @list.board)

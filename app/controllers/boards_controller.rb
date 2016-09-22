@@ -11,6 +11,7 @@ class BoardsController < ApplicationController
     @lists = @board.lists
     @new_list = List.new
     @new_card = Card.new
+    @feeds = @board.feeds.reverse
     # @feeds
   end
 

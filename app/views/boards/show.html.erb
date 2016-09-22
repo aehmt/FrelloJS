@@ -1,29 +1,62 @@
-Board: <%= @board.name %>
+<div class="board" style="background: <%= @board.color %>">
+  Board: <%= @board.name %>
 
-<%= render 'lists/form', board: @board %>
+  <%= render 'lists/form', board: @board %>
 
-Lists<br>
-<% @board.lists.each do |list| %>
-  <li><%= list.title %></li>
+  Lists<br>
+  <% @board.lists.each do |list| %>
+    <div class="list">
+      <li><%= list.title %></li>
 
-  <ol>
-  <% list.cards.each do |card| %>
-    <li class="<%= 'checked_card' if card.checked %>"><%= card.content %>
+      <ol>
+      <% list.cards.each do |card| %>
+        <li class="<%= 'checked_card' if card.checked %>"><%= card.content %>
 
-    <form class="button_to" method="post" action="/cards/<%= card.id %>">
-      <input type="hidden" name="update_type" value="toggle_check">
-      <input type="hidden" name="_method" value="patch">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="submit" value="<%= 'un' if card.checked %>check">
-    </form>
+        <form class="button_to" method="post" action="/cards/<%= card.id %>">
+          <input type="hidden" name="update_type" value="toggle_check">
+          <input type="hidden" name="_method" value="patch">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="submit" value="<%= 'un' if card.checked %>check">
+        </form>
+      <% end %>
+      </ol>
+
+      <%= render 'cards/form', :list => list %>
+    </div>
   <% end %>
-  </ol>
 
-  <%= render 'cards/form', :list => list %>
-<% end %>
+
+  <aside>
+    <% if @feeds %>
+      <% @feeds.each do |feed| %>
+      <p><%= feed.action %></p>
+      <% end %>
+    <% end %>
+  </aside>
+</div>
 
 <style>
   .checked_card {
     color: #999;
+  }
+
+  aside {
+    width: 25%;
+    height: 100vh;
+    background: whitesmoke;
+    position: fixed;
+    top: 0;
+    right: 0;
+    overflow-y: auto;
+    padding: 0 20px;
+  }
+
+  div.list {
+    display: inline-block;
+    width: 18%;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid;
   }
 </style>
