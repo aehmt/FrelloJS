@@ -7,5 +7,5 @@ home
 
 
 <% @boards.each do |board| %>
-  <p><%= board.name %></p>
+  <p><%= link_to board.name, user_board_path(@user, board) %></p>
 <% end %>
