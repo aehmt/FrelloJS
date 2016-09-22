@@ -2,11 +2,11 @@ home
 
 <%= form_for [current_user, @new_board] do |f| %>
   <%= f.text_field :name %>
-  <%= f.color_field :color, value: "#999" %>
+  <%= f.color_field :color, value: "#5ebb9f" %>
   <%= f.submit 'Add' %>
 <% end %>
 
 
 <% @boards.each do |board| %>
-  <p><%= link_to board.name, user_board_path(@user, board) %></p>
+  <p style="background: <%= @board.color if @board %>"><%= link_to board.name, user_board_path(@user, board) %></p>
 <% end %>

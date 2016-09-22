@@ -19,7 +19,6 @@
     
 welcome
 <h2><%= "Hello, #{current_user.email}" if current_user %></h2>
-
     <% flash.each do |name, msg| -%>
       <%= content_tag :div, msg, class: name %>
     <% end -%>
