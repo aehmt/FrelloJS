@@ -1,4 +1,5 @@
 class Feed < ApplicationRecord
+  include ActionView::Helpers::DateHelper
   belongs_to :user, optional: true
   belongs_to :card, optional: true
   belongs_to :list, optional: true
@@ -10,4 +11,7 @@ class Feed < ApplicationRecord
   #user updated the #id card from #id list
   #user deleted the #id list
   #user created the #id list
+  def time_ago
+    "#{time_ago_in_words(self.created_at)} ago"
+  end
 end

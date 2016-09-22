@@ -29,7 +29,7 @@
   <aside>
     <% if @feeds %>
       <% @feeds.each do |feed| %>
-      <p><%= feed.action %></p>
+        <p><%= feed.action %> <small><i><%= feed.time_ago %></i></small></p>
       <% end %>
     <% end %>
   </aside>
