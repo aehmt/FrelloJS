@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'profile#home'
 
   # resources :boards
-  resources :tasks, only: [:create, :update]
+  resources :lists, only: [:create, :update]
   resources :cards, only: [:create, :update]
   
   devise_for :users, controllers: {

@@ -1,0 +1,15 @@
+<%= form_for @new_list do |f| %>
+
+  <% if @new_list.errors.any? %>
+    <h2><%= pluralize(@new_list.errors.count, "error") %> prohibited this list from being saved:</h2>
+    <ul>
+      <% @new_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.hidden_field :board_id, value: board.id %>
+  <%= f.text_field :title, required: 'required' %>
+  <%= f.submit %>
+<% end %>

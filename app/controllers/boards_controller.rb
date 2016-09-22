@@ -8,8 +8,8 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @tasks = @board.tasks
-    @new_task = Task.new
+    @lists = @board.lists
+    @new_list = List.new
     @new_card = Card.new
     # @feeds
   end

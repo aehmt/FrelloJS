@@ -3,7 +3,7 @@ class CreateFeeds < ActiveRecord::Migration[5.0]
     create_table :feeds do |t|
       t.string :action
       t.integer :card_id
-      t.integer :task_id
+      t.integer :list_id
       t.integer :user_id
 
       t.timestamps

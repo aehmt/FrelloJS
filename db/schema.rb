@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160921184840) do
 
   create_table "cards", force: :cascade do |t|
     t.string   "content"
-    t.integer  "task_id"
+    t.integer  "list_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "checked",    default: false
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20160921184840) do
   create_table "feeds", force: :cascade do |t|
     t.string   "action"
     t.integer  "card_id"
-    t.integer  "task_id"
+    t.integer  "list_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "lists", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
