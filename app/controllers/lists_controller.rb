@@ -5,7 +5,8 @@ class ListsController < ApplicationController
 
     @list = List.new(list_params)
     if @list.save
-      Feed.create(list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} created the list: #{@list.title}")
+      binding.pry
+      Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} created the list: #{@list.title}")
     end
       redirect_to user_board_path(current_user, @list.board)
   end
@@ -13,7 +14,7 @@ class ListsController < ApplicationController
   def update
     @list = List.find_by(id: params[:id])
     if @list.update(list_params)
-      Feed.create(list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} updated the list: #{@list.title}")
+      Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} updated the list: #{@list.title}")
     end
     redirect_to user_board_path(current_user, @list.board)
   end
