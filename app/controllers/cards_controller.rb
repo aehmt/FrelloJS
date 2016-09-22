@@ -10,7 +10,11 @@ class CardsController < ApplicationController
 
   def update
     @card = Card.find_by(id: params[:id])
-    @card.update(card_params)
+    if params[:update_type] == "toggle_check"
+      @card.update(checked: !@card.checked)
+    else
+      @card.update(card_params)
+    end
     redirect_to user_board_path(current_user, @card.list.board)
   end
 
