@@ -8,7 +8,14 @@ Tasks<br>
 
   <ol>
   <% task.cards.each do |card| %>
-    <li class="<%= 'checked_card' if card.checked %>"><%= card.content %> <%= button_to "check", card_path(card), method: 'patch', params: {update_type: "toggle_check"} %></li>
+    <li class="<%= 'checked_card' if card.checked %>"><%= card.content %>
+
+      <form class="button_to" method="post" action="/cards/<%= card.id %>">
+        <input type="hidden" name="update_type" value="toggle_check">
+        <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="<%= 'un' if card.checked %>check">
+      </form>
   <% end %>
   </ol>
 
@@ -18,6 +25,6 @@ Tasks<br>
 
 <style>
   .checked_card {
-    text-decoration: line-through;
+    color: #999;
   }
 </style>
