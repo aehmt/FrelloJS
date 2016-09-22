@@ -1,7 +1,7 @@
 home
 
 <%= form_for [current_user, @new_board] do |f| %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, required: 'required' %>
   <%= f.color_field :color, value: "#5ebb9f" %>
   <%= f.submit 'Add' %>
 <% end %>
