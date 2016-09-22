@@ -4,18 +4,17 @@ class ListsController < ApplicationController
   def create
 
     @list = List.new(list_params)
-    # binding.pry
     if @list.save
-      redirect_to user_board_path(current_user, @list.board)
-    else
-      return render :new
+      Feed.create(list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} created the list: #{@list.title}")
     end
+      redirect_to user_board_path(current_user, @list.board)
   end
 
   def update
     @list = List.find_by(id: params[:id])
-    # return head(:forbidden) unless current_user.try(:id) == @list.id
-    @list.update(list_params)
+    if @list.update(list_params)
+      Feed.create(list_id: @list.id, user_id: current_user.id, action: "#{current_user.email[0].upcase} updated the list: #{@list.title}")
+    end
     redirect_to user_board_path(current_user, @list.board)
   end
 
