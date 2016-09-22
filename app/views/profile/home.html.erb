@@ -2,6 +2,7 @@ home
 
 <%= form_for [current_user, @new_board] do |f| %>
   <%= f.text_field :name %>
+  <%= f.color_field :color, value: "#999" %>
   <%= f.submit 'Add' %>
 <% end %>
 

@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="background: <%= @board.color if @board %>">
     <nav>
       <%= link_to("Sign up", new_user_registration_path) %>
       <%= link_to("Sign in", new_user_registration_path) %>
