@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # resources :boards
   resources :lists, only: [:create, :update]
   resources :cards, only: [:create, :update]
+  resources :collaborations, only: [:create, :update]
   
   devise_for :users, controllers: {
     omniauth_callbacks: "users/omniauth_callbacks"
