@@ -19,11 +19,10 @@ class CardsController < ApplicationController
       @card.update(card_params)
       Feed.create(board_id: @card.list.board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: "#{current_user.email[0].upcase} updated a card in #{@card.list.title}")
     end
-    redirect_to user_board_path(current_user, @card.list.board)
+    redirect_to user_board_path(current_user, @board)
   end
 
   def destroy
-    @board = @card.list.board
     @card.destroy
     redirect_to user_board_path(current_user, @board)
   end
@@ -32,6 +31,7 @@ class CardsController < ApplicationController
 
   def set_card
     @card = Card.find_by(id: params[:id])
+    @board = @card.list.board
   end
 
   def card_params
