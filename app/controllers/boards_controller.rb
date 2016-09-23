@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards
-    show_home
+    redirect_to root_path and return
   end
 
   def show
