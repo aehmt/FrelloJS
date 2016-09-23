@@ -1,0 +1,17 @@
+<div class="ui mini inverted menu" style="background: <%= @board ? 'rgba(0,0,0, 0.2)': '#5ebb9f'%>">
+  <a class="item">
+    Home
+  </a>
+  <div class="item">
+    <div class="ui icon input">
+      <input type="text" placeholder="Search...">
+      <i class="search link icon"></i>
+    </div>
+  </div>
+  <div class="right menu">
+    <%= link_to "Sign up", new_user_registration_path, class: "ui item" %>
+    <%= link_to "login", new_user_session_path, class: "ui item" %>
+    <%= link_to "logout", destroy_user_session_path, method: :get, class: "ui item" %>
+    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "ui item" %>
+  </div>
+</div>

@@ -1,20 +1,21 @@
-home
-
 <%= form_for [current_user, @new_board] do |f| %>
   <%= f.text_field :name, required: 'required' %>
   <%= f.color_field :color, value: "#5ebb9f" %>
-  <%= f.submit 'Add' %>
+  <%= f.submit 'Add board', class: "ui button mini" %>
 <% end %>
 
 
-<% @boards.each do |board| %>
-  <a href="/users/<%= @user.id %>/boards/<%= board.id %>">
-    <div class="board-tile" style="background: <%= board.color %>">
-        <p><%= board.name %></p>
+<div class="ui four column doubling stackable grid container">
+  <% @boards.each do |board| %>
+    <div class="column">
+      <a href="/users/<%= @user.id %>/boards/<%= board.id %>">
+        <div class="board-tile" style="background: <%= board.color %>">
+          <p><%= board.name %></p>
+        </div>
+      </a>
     </div>
-  </a>
-<% end %>
-
+  <% end %>
+</div>
 
 <style type="text/css">
   .board-tile {
@@ -23,12 +24,11 @@ home
     width: 230px;
     height: 70px;
     padding: 10px;
-    margin: 10px;
   }
   .board-tile p {
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
   }
 </style>
