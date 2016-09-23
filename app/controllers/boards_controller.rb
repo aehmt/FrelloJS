@@ -1,6 +1,6 @@
 require 'pry'
 class BoardsController < ApplicationController
-  before_action :find_board, only: [:show, :update]
+  before_action :set_board, only: [:show, :update, :destroy]
 
   def index
     @boards = current_user.boards
@@ -12,7 +12,6 @@ class BoardsController < ApplicationController
     @new_list = List.new(duedate: DateTime.now.utc.end_of_day)
     @new_card = Card.new
     @feeds = @board.feeds.reverse
-    # @feeds
   end
 
   def create
@@ -29,16 +28,17 @@ class BoardsController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    @board.destroy
+    redirect_to user_boards_path(current_user)
+  end
+
   private
     def board_params
       params.require(:board).permit(:name, :color, :private, :starred)
     end
 
-    def show_home(data = nil)
-      redirect_to root_path(data) and return
-    end
-
-    def find_board
+    def set_board
       @board = Board.find_by(id: params[:id])
     end
 end

@@ -1,4 +1,8 @@
 class CardsController < ApplicationController
+
+  before_action :set_card, only: [:update, :destroy]
+
+
   def create
     @card = Card.new(card_params)
     if @card.save
@@ -8,7 +12,6 @@ class CardsController < ApplicationController
   end
 
   def update
-    @card = Card.find_by(id: params[:id])
     if params[:update_type] == "toggle_check"
       @card.update(checked: !@card.checked)
       Feed.create(board_id: @card.list.board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: "#{current_user.email[0].upcase} marked the card (#{@card.content}) in #{@card.list.title} #{'un' if !@card.checked}completed.")
@@ -19,7 +22,17 @@ class CardsController < ApplicationController
     redirect_to user_board_path(current_user, @card.list.board)
   end
 
+  def destroy
+    @board = @card.list.board
+    @card.destroy
+    redirect_to user_board_path(current_user, @board)
+  end
+
   private
+
+  def set_card
+    @card = Card.find_by(id: params[:id])
+  end
 
   def card_params
     params.require(:card).permit(:content, :list_id)
