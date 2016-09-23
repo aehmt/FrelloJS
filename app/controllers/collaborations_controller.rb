@@ -25,9 +25,15 @@ class CollaborationsController < ApplicationController
 
   def set_collaboration
     @user = User.find_by(email: params[:user][:email])
+    @board = Board.find_by(id: params[:user][:board_id])
+
+    if @user == nil
+      flash[:message] = "User doesn't exist!"
+      redirect_to user_board_path(current_user, @board)
+    end
+
     @collaboration = Collaboration.find_by(id: params[:id])
     @card = Card.find_by(id: params[:user][:card_id])
-    @board = Board.find_by(id: params[:user][:board_id])
   end
 
   def collaboration_params

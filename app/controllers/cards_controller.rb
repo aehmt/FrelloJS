@@ -6,7 +6,7 @@ class CardsController < ApplicationController
   def create
     @card = Card.new(card_params)
     if @card.save
-      Feed.create(board_id: @card.list.board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: "#{current_user.email[0].upcase} created a card in #{@card.list.title}")
+      Feed.create(board_id: @card.list.board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: "#{current_user.email[0].upcase} created a #{@card.content} card in #{@card.list.title}")
       redirect_to user_board_path(current_user, @card.list.board)
     end
   end
