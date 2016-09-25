@@ -23,6 +23,10 @@ class User < ApplicationRecord
     end      
   end
 
+  def avatar
+    self.email[0].upcase
+  end
+
   private
     def set_default_role
       self.role ||= :user

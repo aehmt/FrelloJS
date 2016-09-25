@@ -5,14 +5,14 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     if @list.save
-      Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "#{current_user.email} created the list: #{@list.title}")
+      Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "created list #{@list.title}")
     end
       redirect_to user_board_path(current_user, @list.board)
   end
 
   def update
     if @list.update(list_params)
-      Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "#{current_user.email} updated the list: #{@list.title}")
+      Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "updated list #{@list.title}")
     end
     redirect_to user_board_path(current_user, @board)
   end

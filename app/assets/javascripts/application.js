@@ -18,7 +18,8 @@
 $('.ui.dropdown').dropdown({action:'nothing'});
 
 $('.ui.sidebar').sidebar({
-    context: $('.pushable')
-  }).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.sidebar-toggler', 'toggle');
+  context: $('.pushable'),
+  dimPage: false
+}).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.item.sidebar-toggler');
 
 // $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');

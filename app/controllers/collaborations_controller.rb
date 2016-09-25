@@ -6,7 +6,7 @@ class CollaborationsController < ApplicationController
     @collaboration = Collaboration.find_or_initialize_by(user_id: @user.id, card_id: params[:user][:card_id])
     
     if @collaboration.save
-      Feed.create(board_id: @board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: "#{@user.email} joined #{@card.content}")
+      Feed.create(board_id: @board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: " joined card #{@card.content}")
     end
     redirect_to user_board_path(current_user, @board)
   end

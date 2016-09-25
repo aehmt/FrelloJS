@@ -12,11 +12,6 @@
 </div>
 
 <div class="board" style="background: <%= @board.color %>;">
-  <div class="">
-    
-  </div>
-  
-
   <div class="lists-column" style="width: <%= @board.lists.size * 228 + 238 %>px">
     <% @board.lists.each do |list| %>
       <div class="list">
@@ -51,7 +46,7 @@
               <div class="collaborators">
                 <% card.collaborators.each do |collaborator| %>
                   <a class="collaborator avatar">
-                  <%= collaborator.email[0].upcase %>
+                  <%= collaborator.avatar %>
                   </a>
                 <% end %>
               </div>
@@ -72,13 +67,6 @@
   </div>
 </div>
 
-<aside>
-  <% if @feeds %>
-    <% @feeds.each do |feed| %>
-      <p><%= feed.action %> <small><i><%= feed.time_ago %></i></small></p>
-    <% end %>
-  <% end %>
-</aside>
 
 <style>
   .clearfix {
@@ -91,7 +79,7 @@
     background: #ccc;
     color: #444;
     padding: 5px 8px;
-    margin-left: 3px;
+    margin: 0 3px;
     border-radius: 3px;
   }
 
@@ -118,7 +106,7 @@
   }
 
   .board-info {
-    padding: 0 10px;
+    padding: 6px 10px 0;
     font-size: 11px;
     color: white;
   }
@@ -138,24 +126,33 @@
   .sidebar-toggler, .sidebar-toggler:active, .sidebar-toggler:hover {
     color: white;
   }
+  .ui.pushable {
+    height: 94vh !important;
+    position: relative;
+    top: -13px;
+  }
+  .sidebar.menu {
+    /*height: 90vh !important;*/
+    border-radius: 2px !important;
+  }
 
   aside {
-    display: none;
-    width: 25%;
-    height: 100vh;
+    /*display: none;*/
+    /*width: 25%;*/
+    /*height: 70vh;*/
     background: whitesmoke;
-    position: fixed;
-    top: 40px;
-    right: 0;
-    overflow-y: auto;
-    padding: 0 20px;
+    /*position: fixed;*/
+    /*top: 40px;*/
+    /*right: 0;*/
+    overflow-y: scroll;
+    padding: 6px;
   }
 
 
   .board {
     width: auto;
     overflow-x: scroll;
-    padding: 20px 10px;
+    padding: 10px;
   }
 
   div.list {
@@ -166,6 +163,7 @@
     overflow-y: auto;
     padding: 7px;
     margin-right: 8px;
+    margin-bottom: 8px;
     border-radius: 3px;
   }
 
@@ -174,7 +172,7 @@
   }
 
   div.list .cards {
-    max-height: 68vh;
+    max-height: 73vh;
     overflow-y: auto;
   }
 

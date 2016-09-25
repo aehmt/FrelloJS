@@ -8,20 +8,40 @@
   </head>
 
   <body style="background: <%= @board.color if @board %>">
+     <header>
+       <%= render 'layouts/nav' %>
+     </header>
 
-    <%= render 'layouts/nav' %>
-    <main>
-      <% flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, class: name %>
-      <% end -%>
+     <div class="ui pushable">
+      <div class="ui  right sidebar menu">
+        <% if @feeds %>
+          <aside>
+            <% @feeds.each do |feed| %>
+              <p><span class="avatar"><%= feed.user.avatar %> </span><%= feed.action %>
+              <small><i><%= feed.time_ago %></i></small>
+              </p>
+            <% end %>
+          </aside>
+        <% end %>
+      </div>
+      <div class="pusher">
+        <div class="ui">
+          <main>
+            <% flash.each do |name, msg| -%>
+              <%= content_tag :div, msg, class: name %>
+            <% end -%>
 
-      <%= yield %>
-    </main>
+            <%= yield %>
+          </main>
+        </div>
+      </div>
+    </div>
+    
 
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <!-- JS -->
-    <%= javascript_include_tag 'semantic.min' %>
+    <%= javascript_include_tag 'semantic.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <style type="text/css">
