@@ -3,7 +3,8 @@ class CollaborationsController < ApplicationController
 
   def create
     # binding.pry
-    @collaboration = Collaboration.new(user_id: @user.id, card_id: params[:user][:card_id])
+    @collaboration = Collaboration.find_or_initialize_by(user_id: @user.id, card_id: params[:user][:card_id])
+    
     if @collaboration.save
       Feed.create(board_id: @board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: "#{@user.email} joined #{@card.content}")
     end
@@ -32,7 +33,7 @@ class CollaborationsController < ApplicationController
       redirect_to user_board_path(current_user, @board)
     end
 
-    @collaboration = Collaboration.find_by(id: params[:id])
+    # @collaboration = Collaboration.find_by(id: params[:id])
     @card = Card.find_by(id: params[:user][:card_id])
   end
 
