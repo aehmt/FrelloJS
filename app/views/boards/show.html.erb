@@ -43,13 +43,9 @@
                   <%= render 'cards/users', card: card %>
                 </div>
               </div>
-            </div>
-
-            
+            </div> 
 
             <p class="card-content"><%= card.content %></p>
-
-            <div class="clearfix"></div>
 
             <% if card.collaborators.count > 0 %>
               <div class="collaborators">
@@ -231,6 +227,7 @@
 
   div.collaborators {
     display: inline-block;
+    padding-left: -3px;
   }
 
 
