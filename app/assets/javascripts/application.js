@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$('.ui.dropdown').dropdown({action:'nothing'});
+
+$('.ui.sidebar').sidebar({
+    context: $('.pushable')
+  }).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.sidebar-toggler', 'toggle');
+
+// $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');

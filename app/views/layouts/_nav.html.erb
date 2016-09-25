@@ -1,17 +1,30 @@
-<div class="ui mini inverted menu" style="background: <%= @board ? 'rgba(0,0,0, 0.2)': '#5ebb9f'%>">
-  <a class="item">
-    Home
-  </a>
+<nav class="ui mini inverted menu" style="background: <%= @board ? 'rgba(0,0,0, 0.2)': '#2d6daf'%>">
+  <a class="item" href="/">Frello</a>
   <div class="item">
-    <div class="ui icon input">
-      <input type="text" placeholder="Search...">
+    <div class="ui icon input search">
+      <input class="search-bar" type="search">
       <i class="search link icon"></i>
     </div>
   </div>
   <div class="right menu">
-    <%= link_to "Sign up", new_user_registration_path, class: "ui item" %>
-    <%= link_to "login", new_user_session_path, class: "ui item" %>
-    <%= link_to "logout", destroy_user_session_path, method: :get, class: "ui item" %>
-    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "ui item" %>
+    <% if user_signed_in? %>
+      <%= link_to "logout", destroy_user_session_path, method: :get, class: "ui item" %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path, class: "ui item" %>
+      <%= link_to "login", new_user_session_path, class: "ui item" %>
+    <% end %>
   </div>
-</div>
+</nav>
+
+<style type="text/css">
+ /* nav {
+    width: 100%;
+    position: fixed;
+  }*/
+  div.search{
+    /*background: none !important;*/
+  }
+  input.search-bar{
+    background: rgba(255,255,255, 0.2) !important;
+  }
+</style>

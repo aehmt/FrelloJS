@@ -1,12 +1,24 @@
 <%= form_for User.new, :url => collaborations_path do |f| %>
   <%= f.hidden_field :card_id, value:card.id %>
   <%= f.hidden_field :board_id, value:card.list.board.id %>
-  <%= f.label :email, "First Name" %>:
-  <%= f.text_field :email, list: "names" %>
+  <%= f.text_field :email, list: "names", placeholder: 'search users',required: 'required',autofocus: 'autofocus' %>
   <datalist id="names">
     <% User.all.each do |user| %>
       <option value="<%=user.email%>" id="<%=user.id%>">
     <% end %>
   </datalist>
-  <%= f.submit 'Add'%>
+  <%= f.submit 'add', class: 'ui mini button' %>
 <% end %>
+
+
+<style type="text/css">
+  .new_user input {
+    max-width: 100px;
+  }
+
+  .new_user input[type=text] {
+    background: none;
+    outline: none;
+    border: none;
+  }
+</style>

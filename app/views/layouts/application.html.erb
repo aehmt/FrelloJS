@@ -3,14 +3,13 @@
   <head>
     <title>RailsAssm</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'semantic.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body style="background: <%= @board.color if @board %>">
-    <%= render 'layouts/nav' %>
 
+    <%= render 'layouts/nav' %>
     <main>
       <% flash.each do |name, msg| -%>
         <%= content_tag :div, msg, class: name %>
@@ -19,12 +18,17 @@
       <%= yield %>
     </main>
 
-    <style>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- JS -->
+    <%= javascript_include_tag 'semantic.min' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <style type="text/css">
       body {
         height: 100vh;
-        /*overflow: hidden;*/
-        overflow-x: auto;
       }
     </style>
+
   </body>
 </html>

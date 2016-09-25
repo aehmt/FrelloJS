@@ -1,34 +1,86 @@
-<%= form_for [current_user, @new_board] do |f| %>
-  <%= f.text_field :name, required: 'required' %>
-  <%= f.color_field :color, value: "#5ebb9f" %>
-  <%= f.submit 'Add board', class: "ui button mini" %>
-<% end %>
 
+<!-- 
+  trello blue: #2d6daf
+  frello green: #5ebb9f
+ -->
+<div class="ui container">
+  <h3>Personal Boards</h3>
 
-<div class="ui four column doubling stackable grid container">
-  <% @boards.each do |board| %>
-    <div class="column">
+  <div class="ui grid">
+    <% @boards.each do |board| %>
       <a href="/users/<%= @user.id %>/boards/<%= board.id %>">
-        <div class="board-tile" style="background: <%= board.color %>">
+        <div class="board-tile four wide column" style="background: <%= board.color %>">
           <p><%= board.name %></p>
         </div>
       </a>
-    </div>
-  <% end %>
+    <% end %>
+
+    <a>
+      <div class="board-tile create-board four wide column" style="background: whitesmoke">
+        <%= form_for [current_user, @new_board] do |f| %>
+          <%= f.text_field :name, placeholder: 'Create new board...', required: 'required' %>
+          <%= f.color_field :color, value: "#2d6daf" %>
+          <%= f.submit '+', class: 'ui mini button' %>
+        <% end %>
+      </div>
+    </a>
+  </div>
 </div>
+
+
+
 
 <style type="text/css">
   .board-tile {
     display: inline-block;
-    border-radius: 2px;
-    width: 230px;
-    height: 70px;
-    padding: 10px;
+    border-radius: 3px;
+    width: 225px;
+    height: 80px;
+    padding: 5px 10px;
+    margin: 6px -8px;
   }
+
+  .board-tile a {
+    display: inline-block;
+  } 
+
   .board-tile p {
     color: white;
     text-decoration: none;
     font-size: 15px;
-    text-align: center;
+    font-weight: 800;
+  }
+
+  .board-tile.create-board {
+    padding: 25px 20px;
+    font-size: 12px;
+  }
+
+  .board-tile.create-board input {
+    background: none;
+    border-color: transparent;
+    outline: none;
+    margin: 0;
+    display: inline-block;
+  }
+
+  .board-tile.create-board input[type=text]{
+    width: 60%;
+  }
+
+  .board-tile.create-board input[type=color], 
+  .board-tile.create-board input[type=submit] {
+    width: 30px;
+    height: 30px;
+  }
+
+  .board-tile.create-board input[type=submit] {
+    color: #888;
+    font-size: 20px;
+    font-weight: 900;
+    background: #ccc;
+    padding: 0 1px 2px;
+    height: 20px;
+    border-radius: 2px;
   }
 </style>

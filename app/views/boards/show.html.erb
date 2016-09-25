@@ -1,47 +1,117 @@
-<div class="board" style="background: <%= @board.color %>">
-  Board: <%= @board.name %>
+<div class="board-info">
+  <div class="left-info">
+    <h3><%= @board.name %></h3>
+    <p class="frello btn"><%= @board.private ? 'Private' : 'Public' %></p>
+  </div>
 
-  <%= render 'lists/form', board: @board %>
-
-  Lists<br>
-  <% @board.lists.each do |list| %>
-    <div class="list">
-      <li><%= list.title %></li>
-
-      <ol>
-      <% list.cards.each do |card| %>
-        <li class="<%= 'checked_card' if card.checked %>"><%= card.content %>
-
-        <form class="button_to" method="post" action="/cards/<%= card.id %>">
-          <input type="hidden" name="update_type" value="toggle_check">
-          <input type="hidden" name="_method" value="patch">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="submit" value="<%= 'un' if card.checked %>check">
-        </form>
-        <%= render 'cards/users', :card => card %>
-      <% end %>
-      </ol>
-
-      <%= render 'cards/form', :list => list %>
-    </div>
-  <% end %>
-
-
-  <aside>
-    <% if @feeds %>
-      <% @feeds.each do |feed| %>
-        <p><%= feed.action %> <small><i><%= feed.time_ago %></i></small></p>
-      <% end %>
-    <% end %>
-  </aside>
+  <div class="right-info">
+    <a class="item sidebar-toggler frello btn">
+      Show Feeds...
+    </a>
+  </div>
 </div>
 
+<div class="board" style="background: <%= @board.color %>;">
+  <div class="">
+    
+  </div>
+  
+
+  <div class="lists-column" style="width: <%= @board.lists.size * 228 + 238 %>px">
+    <% @board.lists.each do |list| %>
+      <div class="list">
+        <h5><%= list.title %></h5>
+
+        <div class="cards">
+          <% list.cards.each do |card| %>
+          <div class="card <%= 'checked' if card.checked %>">
+
+            <div class="ui top right pointing labeled icon dropdown mini">
+              <i class="dropdown grey icon"></i>
+              <div class=" menu">
+                <div class="item">
+                  <form class="button_to" method="post" action="/cards/<%= card.id %>">
+                    <input type="hidden" name="update_type" value="toggle_check">
+                    <input type="hidden" name="_method" value="patch">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <input type="submit" value="mark as <%= 'un' if card.checked %>completed" class="frello btn light">
+                  </form>
+                </div>
+
+                <div class="header">Add a collaborator</div>
+                <div class="item">
+                  <%= render 'cards/users', :card => card %>
+                </div>
+              </div>
+            </div>
+
+            <p class="card-content"><%= card.content %></p>
+
+          </div>
+
+          <% end %>
+        </div>
+
+        <%= render 'cards/form', :list => list %>
+      </div>
+    <% end %>
+   
+    <div id="newlist" class="card">
+      <%= render 'lists/form', board: @board %>
+    </div>
+  </div>
+</div>
+
+<aside>
+  <% if @feeds %>
+    <% @feeds.each do |feed| %>
+      <p><%= feed.action %> <small><i><%= feed.time_ago %></i></small></p>
+    <% end %>
+  <% end %>
+</aside>
+
 <style>
-  .checked_card {
-    color: #999;
+  .frello.btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 4px;
+    outline: none;
+  }
+
+  .frello.btn:hover {
+    background: rgba(0,0,0,0.2);
+  }
+
+  .frello.btn.light:hover {
+    background: none;
+  }
+
+  .board-info {
+    padding: 0 10px;
+    font-size: 11px;
+    color: white;
+  }
+  .board-info div {
+    display: inline-block;
+  }
+
+  .board-info .left-info * {
+    display: inline;
+    margin-right: 3px;
+  }
+
+  .board-info .right-info {
+    float : right;
+  }
+
+  .sidebar-toggler, .sidebar-toggler:active, .sidebar-toggler:hover {
+    color: white;
   }
 
   aside {
+    display: none;
     width: 25%;
     height: 100vh;
     background: whitesmoke;
@@ -52,12 +122,58 @@
     padding: 0 20px;
   }
 
-  div.list {
-    display: inline-block;
-    width: 18%;
-    max-height: 70vh;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid;
+
+  .board {
+    width: auto;
+    overflow-x: scroll;
+    padding: 20px 10px;
   }
+
+  div.list {
+    background-color: whitesmoke;
+    display: inline-block;
+    width: 220px;
+    float: left;
+    overflow-y: auto;
+    padding: 7px;
+    margin-right: 8px;
+    border-radius: 3px ;
+  }
+
+  div.list input {
+    border-radius: 2px;
+  }
+
+  div.list .cards {
+    max-height: 68vh;
+    overflow-y: auto;
+  }
+
+  div.list .cards .card {
+    width: 100%;
+    background: #fff;
+    padding: 5px;
+    margin-bottom: 8px;
+    border-radius: 3px ; 
+  }
+
+  .cards .card p, .cards .card .dropdown {
+    display: inline-block;
+  }
+
+  .card.checked {
+    background: #efffef !important;
+    color: #888;
+  }
+
+  .ui.dropdown {
+    float: right;
+  }
+
+  .ui.dropdown menu {
+    width: auto !important;
+    z-index: 101 !important;
+  }
+
+
 </style>

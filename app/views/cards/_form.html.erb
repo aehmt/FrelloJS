@@ -11,7 +11,20 @@
   <% end %>
 
   <%= f.hidden_field :list_id, value: list.id %>
-  <%= f.text_field :content, required: 'required' %>
 
-<%= f.submit %>
+  <%= f.text_field :content, placeholder: 'Add a card...', required: 'required', class: 'transparent-input card input' %>
+
 <% end %>
+
+
+<style type="text/css">
+  input.transparent-input {
+    background: none;
+    border-color: transparent;
+    outline: none;
+  }
+
+  .card.input {
+    width: 100%;
+  }
+</style>
