@@ -14,12 +14,13 @@ function createBoard() {
     data :params,
     success: function(board) {
       
-      $('#boards').prepend(
+
+      $('#boards').prepend($(
       `<a href="/users/${board.user_id}/boards/${board.id}">
         <div class="board-tile four wide column" style="background: ${board.color}">
           <p>${board.name}</p>
         </div>
-      </a>`)
+      </a>`).fadeIn('slow'))
 
     },
     error: function() {
