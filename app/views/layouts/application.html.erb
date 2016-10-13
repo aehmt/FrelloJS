@@ -13,7 +13,7 @@
      </header>
 
      <div class="ui pushable">
-      <div class="ui  right sidebar menu">
+      <div class="ui right sidebar menu">
         <% if @feeds %>
           <aside>
             <% @feeds.each do |feed| %>
@@ -36,19 +36,9 @@
         </div>
       </div>
     </div>
-    
 
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
     <!-- JS -->
-    <%= javascript_include_tag 'semantic.min', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <style type="text/css">
-      body {
-        height: 100vh;
-      }
-    </style>
-
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

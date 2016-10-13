@@ -11,15 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
+//= require semantic.min
+//= require board
 //= require turbolinks
 //= require_tree .
-
-$('.ui.dropdown').dropdown({action:'nothing'});
-
-$('.ui.sidebar').sidebar({
-  context: $('.pushable'),
-  dimPage: false
-}).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.item.sidebar-toggler');
-
-// $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
