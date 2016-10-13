@@ -20,6 +20,12 @@
           </div>
         </div>
 
+        <div class="field">
+          <div class="ui left icon input">
+            <%= f.password_field :password_confirmation, placeholder: "confirm password", autocomplete: "off" %>
+          </div>
+        </div>
+
         <% if devise_mapping.rememberable? -%>
         <div class="field">
           <div class="">
