@@ -1,0 +1,30 @@
+<div class="ui right sidebar menu">
+  <aside>
+  <div id="collabs-section">
+    <div class="collaborators">
+      <% @board.collaborators.each do |collaborator| %>
+        <a class="draggable collaborator avatar">
+        <%= collaborator.avatar %>
+        </a>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="feeds-section">
+    <% if @feeds %>
+      <h4>activities</h4>
+      <% @feeds.each do |feed| %>
+        <p><span class="avatar"><%= feed.user.avatar %> </span><%= feed.action %>
+        <small><i><%= feed.time_ago %></i></small>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+  </aside>
+</div>
+
+<style type="text/css">
+  aside #collabs-section {
+    margin: 5px 0 10px;
+  }
+</style>
