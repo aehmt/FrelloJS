@@ -6,7 +6,7 @@
 <div class="ui container">
   <h3>Personal Boards</h3>
 
-  <div class="ui grid">
+  <div class="ui grid" id="boards">
     <% @boards.each do |board| %>
       <a href="/users/<%= @user.id %>/boards/<%= board.id %>">
         <div class="board-tile four wide column" style="background: <%= board.color %>">
@@ -17,19 +17,15 @@
 
     <a>
       <div class="board-tile create-board four wide column" style="background: whitesmoke">
-        <%= form_for [current_user, @new_board] do |f| %>
+        <%= form_for [current_user, @new_board], :html=> {:id => 'new_board',:multipart => :true, :remote => true} do |f| %>
           <%= f.color_field :color, value: "#2d6daf" %>
           <%= f.text_field :name, placeholder: 'Create new board...', required: 'required' %>
-          <%= f.submit '+', class: 'ui mini button' %>
+          <%= f.submit '+', 'onsubmit':'return false;', class: 'ui mini button', id: 'createboard' %>
         <% end %>
       </div>
     </a>
   </div>
 </div>
-
-
-
-
 <style type="text/css">
   .board-tile {
     display: inline-block;

@@ -1,10 +1,17 @@
-require 'pry'
 class BoardsController < ApplicationController
   before_action :find_board, only: [:show, :update]
 
   def index
     @boards = current_user.boards
-    redirect_to root_path and return
+    @last_board = Board.last
+    # redirect_to root_path and return
+    # render :json => @boards.as_json
+
+
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { render json: @boards }
+    end
   end
 
   def show
@@ -18,9 +25,14 @@ class BoardsController < ApplicationController
   def create
     @board = current_user.boards.build(board_params)
     if @board.save
-      redirect_to user_boards_path(current_user)
-    else
-      redirect_to root_path, alert: 'Invalid Something'
+      # redirect_to user_boards_path(current_user)
+      # respond_to do |format|
+      #   format.html { redirect_to root_path }
+      #   format.json { render json: @board }
+      # end
+    # else
+      # redirect_to root_path, alert: 'Invalid Something'
+      render json: @board, status: 201
     end
   end
 
