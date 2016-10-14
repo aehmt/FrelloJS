@@ -1,13 +1,13 @@
-<%= form_for @new_list do |f| %>
+<%= form_for(@new_list, remote: true) do |f| %>
 
-  <% if @new_list.errors.any? %>
-    <h2><%= pluralize(@new_list.errors.count, "error") %> prohibited this list from being saved:</h2>
-    <ul>
-      <% @new_list.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%# <% if @new_list.errors.any? %1> %>
+  <%#   <h2><%= pluralize(@new_list.errors.count, "error") %1> prohibited this list from being saved:</h2> %>
+  <%#   <ul> %>
+  <%#     <% @new_list.errors.full_messages.each do |msg| %1> %>
+  <%#       <li><%= msg %1></li> %>
+  <%#     <% end %1> %>
+  <%#   </ul> %>
+  <%# <% end %1> %>
 
   <%= f.hidden_field :board_id, value: board.id %>
   <%= f.text_field :title, required: 'required', placeholder: 'Add a list...' %><br>

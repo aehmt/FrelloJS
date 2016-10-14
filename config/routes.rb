@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'profile#home'
   
   # resources :boards
+  post 'cards/newcard', to: 'cards#create'
+
   resources :lists, only: [:create, :update]
   resources :cards, only: [:create, :update]
   resources :collaborations, only: [:create, :update]
@@ -10,8 +12,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  post 'boards/create', to: 'boards#create'
-  get 'boards/index', to: 'boards#index'
+  post '/boards/create', to: 'boards#create'
+  get '/boards/index', to: 'boards#index'
   resources :users do
     resources :boards
   end

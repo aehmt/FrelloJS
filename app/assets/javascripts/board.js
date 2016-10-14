@@ -1,4 +1,4 @@
-$(function () {
+$( document ).on('turbolinks:load', function() {
 
   $('#lists-column').sortable({
     // connectWith: ".lists-column",
@@ -24,7 +24,13 @@ $(function () {
   createBoard();
   createList();
   createCard();
+  getBoards();
+
 });
+
+// $(function () {
+
+// });
 
 class List {
   constructor(id, title, position, cards) {
@@ -49,7 +55,7 @@ function increaseWidth(elm, inc) {
 
 function createCard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
-  $(".new_card").on("submit", (function(e) {
+  $(document).on("submit", "#new_card", function(e) {
     e.preventDefault(); 
     e.stopPropagation()
     // var board_name = $('#board_name').val()
@@ -58,7 +64,7 @@ function createCard() {
     $.post('/cards/', params).done(function(card) {
       form.find('input[type=text]').val("")
       // debugger
-      form.parent().find('.cards').append(
+      form.parent().find('.cards').append($(
         `
         <div class="card">
           <p class="card-content">${card.content}</p>
@@ -67,10 +73,10 @@ function createCard() {
           </div>
         </div>
         `
-      )
+      ).fadeIn('slow'))
     })
 
-  }));
+  });
 }
 
 // CREATE LIST
@@ -112,11 +118,13 @@ function createList() {
   }));
 }
 
+
+
 // CREATE BOARD
 
 function createBoard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
-  $("#new_board").off('submit').on("submit", (function(e) {
+  $("#new_board").on("submit", (function(e) {
     e.preventDefault() 
     e.stopPropagation()
     // var board_name = $('#board_name').val()
@@ -143,6 +151,73 @@ function createBoard() {
 
   }));
 }
+
+
+function getBoards() {
+  if ($(location).attr('href') === "http://localhost:3000/") {
+    
+    $.ajax({
+      url: "/boards/index", 
+      type: 'GET'
+
+
+    }).done(function(boards){
+      var len = boards.length 
+      for (var i = 0, len; i < len; i++) {
+        var boardObj = new Board(boards[i].id, boards[i].name, boards[i].color, boards[i].user_id)
+
+          // debugger
+        $('#boards').prepend($(
+          boardObj.boardRender()
+        ).fadeIn('slow'))
+
+      } 
+    })
+  } 
+}
+
+
+class Board {
+  constructor(id, name, color, user_id) {
+    this.id = id
+    this.user_id = user_id
+    this.name = name
+    this.color = color 
+  }
+
+  boardRender() {
+    return  `
+    <a href="/users/${this.user_id}/boards/${this.id}">
+      <div class="board-tile four wide column" style="background: ${this.color}">
+        <p> ${this.name} </p>
+      </div>
+    </a>
+    `
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
