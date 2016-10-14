@@ -13,9 +13,11 @@
 
 <div class="board" style="background: <%= @board.color %>;">
   <div id="lists-column" style="width: <%= @board.lists.size * 228 + 238 %>px">
-    <% @board.lists.each do |list| %>
-      <%= render list %>
-    <% end %>
+    <div id="lists" >
+      <% @board.lists.each do |list| %>
+        <%= render list %>
+      <% end %>
+    </div>
    
     <div id="newlist" class="card">
       <%= render 'lists/form', board: @board %>
