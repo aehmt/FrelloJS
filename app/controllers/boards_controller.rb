@@ -3,6 +3,7 @@ class BoardsController < ApplicationController
 
   def index
     @boards = current_user.boards
+    @lists = @boards.lists
     @last_board = Board.last
     # redirect_to root_path and return
     # render :json => @boards.as_json

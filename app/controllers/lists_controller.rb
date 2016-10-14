@@ -7,7 +7,9 @@ class ListsController < ApplicationController
     if @list.save
       Feed.create(board_id: @list.board.id, list_id: @list.id, user_id: current_user.id, action: "created list #{@list.title}")
     end
-      redirect_to user_board_path(current_user, @list.board)
+    render json: @list.to_json(include: :cards)
+    
+    # redirect_to user_board_path(current_user, @list.board)
   end
 
   def update

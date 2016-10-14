@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'actvie_model_serializers'
 gem 'pry'
 gem "omniauth-google-oauth2"
 gem 'omniauth'

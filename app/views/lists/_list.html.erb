@@ -1,0 +1,45 @@
+<div class="list">
+  <h5><%= list.title %></h5>
+
+  <div class="cards sortable">
+    <% list.cards.each do |card| %>
+    <div class="card <%= 'checked' if card.checked %>">
+
+      <div class="ui top right pointing labeled icon dropdown mini">
+        <i class="dropdown grey icon"></i>
+        <div class=" menu">
+          <div class="item">
+            <form class="button_to" method="post" action="/cards/<%= card.id %>">
+              <input type="hidden" name="update_type" value="toggle_check">
+              <input type="hidden" name="_method" value="patch">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input type="submit" value="mark as <%= 'un' if card.checked %>completed" class="frello btn light">
+            </form>
+          </div>
+
+          <div class="header">Add a collaborator</div>
+          <div class="item">
+            <%= render 'cards/users', card: card %>
+          </div>
+        </div>
+      </div> 
+
+      <p class="card-content"><%= card.content %></p>
+
+      <% if card.collaborators.count > 0 %>
+        <div class="collaborators">
+          <% card.collaborators.each do |collaborator| %>
+            <a class="collaborator avatar">
+            <%= collaborator.avatar %>
+            </a>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+    <% end %>
+  </div>
+
+  <%= render 'cards/form', :list => list %>
+</div>
