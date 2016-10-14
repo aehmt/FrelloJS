@@ -90,7 +90,7 @@ function createList() {
       
       var listsColumn = document.getElementById("lists-column");
       
-      $('#lists').append(
+      $('#lists').append($(
         `
         <div class="list">
           <h5>${listObj.title} - ${listObj.cardsCount()} cards</h5>
@@ -105,7 +105,7 @@ function createList() {
           </form>
         </div>
         `
-      )
+      ).fadeIn('slow'))
       increaseWidth(listsColumn, 228)
     })
 
@@ -137,7 +137,7 @@ function createBoard() {
 
       },
       error: function() {
-       alert('lol error');
+       alert('error');
       }
     });
 
