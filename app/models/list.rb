@@ -1,6 +1,7 @@
 class List < ApplicationRecord
   belongs_to :board, optional: true
   has_many :cards
+  has_many :collaborators, through: :cards
   has_many :feeds
 
   def self.overdue

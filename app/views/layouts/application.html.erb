@@ -12,17 +12,7 @@
      </header>
 
      <div class="ui pushable">
-      <div class="ui right sidebar menu">
-        <% if @feeds %>
-          <aside>
-            <% @feeds.each do |feed| %>
-              <p><span class="avatar"><%= feed.user.avatar %> </span><%= feed.action %>
-              <small><i><%= feed.time_ago %></i></small>
-              </p>
-            <% end %>
-          </aside>
-        <% end %>
-      </div>
+      <%= render 'layouts/sidebar' if @board %>
       <div class="pusher">
         <div class="ui">
           <main>

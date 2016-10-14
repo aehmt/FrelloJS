@@ -26,6 +26,20 @@ $(function () {
   createCard();
 });
 
+class List {
+  constructor(id, title, position, cards) {
+    this.title = title
+    this.position = position
+    this.id = id
+    this.cards = cards
+  }
+
+  cardsCount() {
+    return this.cards.length
+  }
+}
+
+
 function increaseWidth(elm, inc) {
   var width = parseInt(elm.style.width)
   elm.style.width = (width + inc) + 'px';
@@ -36,33 +50,24 @@ function increaseWidth(elm, inc) {
 function createCard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
   $(".new_card").on("submit", (function(e) {
-    e.preventDefault() 
+    e.preventDefault(); 
     e.stopPropagation()
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
-
-    $.post('/lists/', params).done(function(list) {
-      $('#new_list input[type=text]').val("")
-      
-      var listsColumn = document.getElementById("lists-column");
-      
-      $('#lists').append(
+    var form = $(this)
+    $.post('/cards/', params).done(function(card) {
+      form.find('input[type=text]').val("")
+      // debugger
+      form.parent().find('.cards').append(
         `
-        <div class="list">
-          <h5>${list.title}</h5>
+        <div class="card">
+          <p class="card-content">${card.content}</p>
 
-          <div class="cards sortable">
+          <div class="collaborators">
           </div>
-
-          <form class="new_card" id="new_card" action="/cards" accept-charset="UTF-8" method="post">
-            <input name="utf8" type="hidden" value="✓">
-            <input value="${list.id}" type="hidden" name="card[list_id]" id="card_list_id">
-            <input placeholder="Add a card..." required="required" class="transparent-input card input" type="text" name="card[content]" id="card_content">
-          </form>
         </div>
         `
       )
-      increaseWidth(listsColumn, 228)
     })
 
   }));
@@ -79,6 +84,8 @@ function createList() {
     var params = $(this).serialize();
 
     $.post('/lists/', params).done(function(list) {
+      var listObj = new List(list.id, list.title, list.position, list.cards)
+
       $('#new_list input[type=text]').val("")
       
       var listsColumn = document.getElementById("lists-column");
@@ -86,14 +93,14 @@ function createList() {
       $('#lists').append(
         `
         <div class="list">
-          <h5>${list.title}</h5>
+          <h5>${listObj.title} - ${listObj.cardsCount()} cards</h5>
 
           <div class="cards sortable">
           </div>
 
           <form class="new_card" id="new_card" action="/cards" accept-charset="UTF-8" method="post">
             <input name="utf8" type="hidden" value="✓">
-            <input value="${list.id}" type="hidden" name="card[list_id]" id="card_list_id">
+            <input value="${listObj.id}" type="hidden" name="card[list_id]" id="card_list_id">
             <input placeholder="Add a card..." required="required" class="transparent-input card input" type="text" name="card[content]" id="card_content">
           </form>
         </div>

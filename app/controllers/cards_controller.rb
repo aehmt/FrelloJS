@@ -7,7 +7,7 @@ class CardsController < ApplicationController
     @card = Card.new(card_params)
     if @card.save
       Feed.create(board_id: @card.list.board.id, card_id: @card.id, user_id: current_user.id, list_id: @card.list_id, action: " created card #{@card.content} in #{@card.list.title}")
-      redirect_to user_board_path(current_user, @card.list.board)
+      render json: @card
     end
   end
 
