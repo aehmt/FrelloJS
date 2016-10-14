@@ -165,11 +165,9 @@ function getBoards() {
       var len = boards.length 
       for (var i = 0, len; i < len; i++) {
         var boardObj = new Board(boards[i].id, boards[i].name, boards[i].color, boards[i].user_id)
-
-          // debugger
         $('#boards').prepend($(
           boardObj.boardRender()
-        ).fadeIn('slow'))
+        ).fadeIn("slow"))
 
       } 
     })
