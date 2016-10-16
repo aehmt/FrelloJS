@@ -12,7 +12,7 @@
 
   <%= f.hidden_field :list_id, value: list.id %>
 
-  <%= f.text_field :content, placeholder: 'Add a card...', required: 'required', class: 'transparent-input card input' %>
+  <%= f.text_field :content, placeholder: 'Add a card...', required: 'required', class: 'transparent-input card input', autocomplete: "off" %>
 
 <% end %>
 

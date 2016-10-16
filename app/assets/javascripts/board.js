@@ -1,53 +1,3 @@
-$(function () {
-
-  $('#lists-column').sortable({
-    // connectWith: ".lists-column",
-    items: ".list"
-    // ,
-    // placeholder: "list darker"
-  })
-
-  $(".cards").sortable({
-    connectWith: ".sortable",
-    items: ".card",
-    start: function(e) {
-      // console.log(this)
-    },
-    stop: function(e) {
-      console.log(this)
-    }
-  })
-
-  $( ".cards" ).disableSelection();
-
-  $('.ui.dropdown').dropdown({action:'nothing'});
-
-  $('.ui.sidebar').sidebar({
-    context: $('.pushable'),
-    dimPage: false
-  }).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.item.sidebar-toggler');
-
-  // $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
-
-  createBoard();
-  createList();
-  createCard();
-});
-
-class List {
-  constructor(id, title, position, cards) {
-    this.title = title
-    this.position = position
-    this.id = id
-    this.cards = cards
-  }
-
-  cardsCount() {
-    return this.cards.length
-  }
-}
-
-
 function increaseWidth(elm, inc) {
   var width = parseInt(elm.style.width)
   elm.style.width = (width + inc) + 'px';
@@ -55,33 +5,50 @@ function increaseWidth(elm, inc) {
 
 // CREATE CARD
 
+
 function createCard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
-  $(".new_card").on("submit", (function(e) {
+  $('#lists').on("submit", "#new_card", function(e) {
+  // $(document).on("submit", "#new_card", function(e) {
+  // $(".list.ui-sortable-handle").on("submit", "#new_card", function(e) {
     e.preventDefault(); 
-    e.stopPropagation()
+    e.stopPropagation();
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
     var form = $(this)
     $.post('/cards/', params).done(function(card) {
       form.find('input[type=text]').val("")
       // debugger
-      form.parent().find('.cards').append(
+      //
+      form.parent().find('.cards.sortable.ui-sortable').append($(
         `
-        <div class="card">
-          <p class="card-content">${card.content}</p>
+          <div class="card ui-sortable-handle"> 
+            <p class="card-content">${card.content}</p>
 
-          <div class="collaborators">
+            <div class="collaborators">
+            </div>
           </div>
-        </div>
         `
-      )
+      ))
     })
-
-  }));
+  });
 }
-
 // CREATE LIST
+
+
+  class List {
+    constructor(id, title, position, cards) {
+      this.title = title
+      this.position = position
+      this.id = id
+      this.cards = cards
+    }
+
+    cardsCount() {
+      return this.cards.length
+    }
+  }
+
 
 function createList() {
   // $("#new_board").off('submit').on("submit", (function(e) {
@@ -90,6 +57,7 @@ function createList() {
     e.stopPropagation()
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
+
 
     $.post('/lists/', params).done(function(list) {
       var listObj = new List(list.id, list.title, list.position, list.cards)
@@ -100,10 +68,9 @@ function createList() {
       
       $('#lists').append($(
         `
-        <div class="list">
-          <h5>${listObj.title} - ${listObj.cardsCount()} cards</h5>
-
-          <div class="cards sortable">
+        <div class="list ui-sortable-handle">
+          <h5>${listObj.title}</h5>
+          <div class="cards sortable ui-sortable">
           </div>
 
           <form class="new_card" id="new_card" action="/cards" accept-charset="UTF-8" method="post">
@@ -113,7 +80,7 @@ function createList() {
           </form>
         </div>
         `
-      ).fadeIn('slow'))
+      ))
       increaseWidth(listsColumn, 228)
     })
 
@@ -124,7 +91,7 @@ function createList() {
 
 function createBoard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
-  $("#new_board").off('submit').on("submit", (function(e) {
+  $("#new_board").on("submit", (function(e) {
     e.preventDefault() 
     e.stopPropagation()
     // var board_name = $('#board_name').val()
@@ -154,3 +121,77 @@ function createBoard() {
 
 
 
+class Board {
+  constructor(id, name, color, user_id) {
+    this.id = id
+    this.user_id = user_id
+    this.name = name
+    this.color = color 
+  }
+
+  boardRender() {
+    return `
+    <a href="/users/${this.user_id}/boards/${this.id}">
+      <div class="board-tile four wide column" style="background: ${this.color}">
+        <p> ${this.name} </p>
+      </div>
+    </a>
+    `
+  }
+}
+
+
+function getBoards() {
+
+
+
+
+
+  if ($(location).attr('href') === "http://localhost:3000/") {
+    
+    $.ajax({
+      url: "/boards/index", 
+      type: 'GET'
+
+    }).done(function(boards){
+      var len = boards.length 
+      for (var i = 0, len; i < len; i++) {
+        var boardObj = new Board(boards[i].id, boards[i].name, boards[i].color, boards[i].user_id)
+        $('#boards').prepend($(
+          boardObj.boardRender()
+        ).fadeIn("slow"))
+      } 
+    })
+  } 
+}
+
+
+// $(document).on('page:fetch', function() { 
+$(document).on('turbolinks:load', function() {
+// $(function () {
+  $('#lists-column').sortable({
+    // connectWith: ".lists-column",
+    items: ".list"
+  })
+
+  $(".cards").sortable({
+    connectWith: ".sortable",
+    // items: ".card"
+  })
+
+  $( ".cards" ).disableSelection();
+
+  $('.ui.dropdown').dropdown({action:'nothing'});
+
+  $('.ui.sidebar').sidebar({
+    context: $('.pushable'),
+    dimPage: false
+  }).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.item.sidebar-toggler');
+
+  // $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
+
+  createBoard();
+  createList();
+  createCard();
+  getBoards();
+});

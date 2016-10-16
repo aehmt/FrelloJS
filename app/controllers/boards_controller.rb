@@ -2,17 +2,19 @@ class BoardsController < ApplicationController
   before_action :find_board, only: [:show, :update]
 
   def index
+
     @boards = current_user.boards
-    @lists = @boards.lists
+    # @lists = @boards.lists
     @last_board = Board.last
     # redirect_to root_path and return
     # render :json => @boards.as_json
 
-
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { render json: @boards }
-    end
+    # respond_to do |format|
+      # format.html { redirect_to root_path }
+      # format.json { render json: @boards }
+    #
+    # end
+    render json: @boards
   end
 
   def show
