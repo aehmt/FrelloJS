@@ -1,0 +1,53 @@
+
+.board-tile {
+  display: inline-block;
+  border-radius: 3px;
+  width: 225px;
+  height: 80px;
+  padding: 5px 10px;
+  margin: 6px -8px;
+}
+
+.board-tile a {
+  display: inline-block;
+} 
+
+.board-tile p {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.board-tile.create-board {
+  padding: 25px 20px;
+  font-size: 12px;
+}
+
+.board-tile.create-board input {
+  background: none;
+  border-color: transparent;
+  outline: none;
+  margin: 0;
+  display: inline-block;
+}
+
+.board-tile.create-board input[type=text]{
+  width: 60%;
+}
+
+.board-tile.create-board input[type=color], 
+.board-tile.create-board input[type=submit] {
+  width: 30px;
+  height: 30px;
+}
+
+.board-tile.create-board input[type=submit] {
+  color: #888;
+  font-size: 20px;
+  font-weight: 900;
+  background: #ccc;
+  padding: 0 1px 2px;
+  height: 20px;
+  border-radius: 2px;
+}

@@ -1,0 +1,19 @@
+.new_user input {
+  max-width: 100px;
+}
+
+.new_user input[type=text] {
+  background: none;
+  outline: none;
+  border: none;
+}
+
+input.transparent-input {
+  background: none;
+  border-color: transparent;
+  outline: none;
+}
+
+.card.input {
+  width: 100%;
+}

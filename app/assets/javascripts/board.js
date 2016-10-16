@@ -36,18 +36,18 @@ function createCard() {
 // CREATE LIST
 
 
-  class List {
-    constructor(id, title, position, cards) {
-      this.title = title
-      this.position = position
-      this.id = id
-      this.cards = cards
-    }
-
-    cardsCount() {
-      return this.cards.length
-    }
+class List {
+  constructor(id, title, position, cards) {
+    this.title = title
+    this.position = position
+    this.id = id
+    this.cards = cards
   }
+
+  cardsCount() {
+    return this.cards.length
+  }
+}
 
 
 function createList() {
