@@ -9,6 +9,9 @@
 
 /* BOARD show */
 <style>
+  .darker {
+    background: rgba(0,0,0,0.3);
+  }
   .clearfix {
     clear: both;
   }
@@ -115,7 +118,7 @@
   }
 
   div.list .cards {
-    max-height: 77vh;
+    /*max-height: 77vh;*/
     overflow-y: auto;
   }
 
@@ -123,6 +126,8 @@
     width: 100%;
     background: #fff;
     padding: 5px;
+    /*padding-bottom: 0;*/
+    /*height: 30px;*/
     margin-bottom: 8px;
     border-radius: 3px ;
     display: block; 
@@ -132,11 +137,11 @@
     background: #eee; 
   }
 
-  div.list .cards .card p {
-    /*width: 90%;*/
-    /*height: auto;*/
-    /*display: block;*/
-  }
+ /* div.list .cards .card p {
+    width: 90%;
+    height: auto;
+    display: block;
+  }*/
 
  /* .cards .card p, .cards .card .dropdown {
     display: inline-block;
@@ -147,7 +152,7 @@
     color: #888;
   }
 
-  .ui.dropdown {
+  /*.ui.dropdown {
     float: right;
     clear: right;
     display: block;
@@ -164,10 +169,10 @@
   .ui.dropdown menu {
     width: auto !important;
     z-index: 101 !important;
-  }
+  }*/
 
   div.collaborators {
-    display: inline-block;
-    padding-left: -3px;
+    /*display: inline-block;*/
+    /*padding-left: -3px;*/
   }
 </style>

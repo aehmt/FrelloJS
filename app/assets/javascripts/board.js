@@ -3,11 +3,19 @@ $(function () {
   $('#lists-column').sortable({
     // connectWith: ".lists-column",
     items: ".list"
+    // ,
+    // placeholder: "list darker"
   })
 
   $(".cards").sortable({
     connectWith: ".sortable",
-    // items: ".card"
+    items: ".card",
+    start: function(e) {
+      // console.log(this)
+    },
+    stop: function(e) {
+      console.log(this)
+    }
   })
 
   $( ".cards" ).disableSelection();

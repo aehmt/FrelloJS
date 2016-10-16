@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'profile#home'
   
   # resources :boards
-  resources :lists, only: [:create, :update]
+  resources :lists, only: [:create, :update, :show]
   resources :cards, only: [:create, :update]
   resources :collaborations, only: [:create, :update]
   

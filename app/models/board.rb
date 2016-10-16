@@ -4,7 +4,7 @@ class Board < ApplicationRecord
   has_many :feeds
   has_many :collaborators, through: :lists
 
-  validates_length_of :name, maximum: 30, message: "board must be a maximium of 30 characters"
+  validates_length_of :name, minimum: 0, maximum: 30, message: "board must be a maximium of 30 characters"
   # validates_uniqueness_of :name
 
 
