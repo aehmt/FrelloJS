@@ -15,5 +15,4 @@
 //= require jquery_ujs
 //= require semantic.min
 //= require board
-//= require turbolinks
 //= require_tree .

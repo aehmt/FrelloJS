@@ -162,8 +162,10 @@ function getBoards() {
 
 
 // $(document).on('page:fetch', function() { 
-$(document).on('turbolinks:load', function() {
-// $(function () {
+// $(document).on('turbolinks:load', function() {
+$(function () {
+//
+
   $('#lists').sortable({
     // connectWith: ".lists-column",
     items: ".list",
