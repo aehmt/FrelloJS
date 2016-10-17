@@ -169,9 +169,26 @@ function getBoards() {
 // $(document).on('page:fetch', function() { 
 $(document).on('turbolinks:load', function() {
 // $(function () {
-  $('#lists-column').sortable({
+  $('#lists').sortable({
     // connectWith: ".lists-column",
-    items: ".list"
+    items: ".list",
+    start: function(e, list) {
+      list.item.addClass("rotate")
+    },
+    stop: function(e, list) {
+      list.item.removeClass("rotate")
+    },
+    placeholder: {
+      element: function(item) {
+          return $(
+          `<div class="list" style="width: 225px; height: ${item.css('height')}; background: rgba(0,0,0,0.2)">
+          </div>`
+          )[0];
+      },
+      update: function(container, p) {
+          return;
+      }
+    } 
   })
 
   $(".cards").sortable({
