@@ -1,0 +1,16 @@
+#new_list input[type=text],
+#new_list input[type=datetime-local] {
+  width: 230px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+  outline: none;
+  border-color: transparent;
+  padding: 5px 0px 5px 5px;
+  margin-bottom: 5px;
+}
+
+#new_list input[type=submit],
+#new_list input[type=datetime-local] {
+  /*float: right !important;*/
+  display: none;
+}

@@ -140,16 +140,6 @@ div.list .cards .card:hover {
   background: #eee; 
 }
 
-/* div.list .cards .card p {
-  width: 90%;
-  height: auto;
-  display: block;
-}*/
-
-/* .cards .card p, .cards .card .dropdown {
-  display: inline-block;
-}
-*/
 .card.checked {
   background: #efffef !important;
   color: #888;
