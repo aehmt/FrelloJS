@@ -1,11 +1,19 @@
+// $(document).on('page:fetch', function() { 
+$(document).on('ready', function() {
+  createBoard();
+  createList();
+  createCard();
+  getBoards();
+});
+
+
+
 function increaseWidth(elm, inc) {
   var width = parseInt(elm.style.width)
   elm.style.width = (width + inc) + 'px';
 }
 
 // CREATE CARD
-
-
 function createCard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
   $('#lists').on("submit", "#new_card", function(e) {
@@ -24,7 +32,6 @@ function createCard() {
         `
           <div class="card ui-sortable-handle"> 
             <p class="card-content">${card.content}</p>
-
             <div class="collaborators">
             </div>
           </div>
@@ -33,22 +40,20 @@ function createCard() {
     })
   });
 }
+
 // CREATE LIST
-
-
 class List {
-  constructor(id, title, position, cards) {
-    this.title = title
-    this.position = position
-    this.id = id
-    this.cards = cards
+  constructor(list) {
+    this.title = list.title
+    this.position = list.position
+    this.id = list.id
+    this.cards = list.cards
   }
 
   cardsCount() {
     return this.cards.length
   }
 }
-
 
 function createList() {
   // $("#new_board").off('submit').on("submit", (function(e) {
@@ -60,7 +65,7 @@ function createList() {
 
 
     $.post('/lists/', params).done(function(list) {
-      var listObj = new List(list.id, list.title, list.position, list.cards)
+      var listObj = new List(list)
 
       $('#new_list input[type=text]').val("")
       
@@ -88,7 +93,6 @@ function createList() {
 }
 
 // CREATE BOARD
-
 function createBoard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
   $("#new_board").on("submit", (function(e) {
@@ -119,8 +123,7 @@ function createBoard() {
   }));
 }
 
-
-
+// GET BOARDS
 class Board {
   constructor(id, name, color, user_id) {
     this.id = id
@@ -140,7 +143,6 @@ class Board {
   }
 }
 
-
 function getBoards() {
   if ($(location).attr('href') === "http://localhost:3000/") {
     
@@ -159,51 +161,3 @@ function getBoards() {
     })
   } 
 }
-
-
-// $(document).on('page:fetch', function() { 
-$(document).on('turbolinks:load', function() {
-// $(function () {
-  $('#lists').sortable({
-    // connectWith: ".lists-column",
-    items: ".list",
-    start: function(e, list) {
-      list.item.addClass("rotate")
-    },
-    stop: function(e, list) {
-      list.item.removeClass("rotate")
-    },
-    placeholder: {
-      element: function(item) {
-          return $(
-          `<div class="list" style="width: 225px; height: ${item.css('height')}; background: rgba(0,0,0,0.2)">
-          </div>`
-          )[0];
-      },
-      update: function(container, p) {
-          return;
-      }
-    } 
-  })
-
-  $(".cards").sortable({
-    connectWith: ".sortable",
-    // items: ".card"
-  })
-
-  $( ".cards" ).disableSelection();
-
-  $('.ui.dropdown').dropdown({action:'nothing'});
-
-  $('.ui.sidebar').sidebar({
-    context: $('.pushable'),
-    dimPage: false
-  }).sidebar('setting', 'transition', 'overlay').sidebar('attach events', '.item.sidebar-toggler');
-
-  // $('.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');
-
-  createBoard();
-  createList();
-  createCard();
-  getBoards();
-});
