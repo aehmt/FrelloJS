@@ -72,8 +72,7 @@ function createList() {
       var listsColumn = document.getElementById("lists-column");
       
       $('#lists').append($(
-        `
-        <div class="list ui-sortable-handle">
+        `<div class="list ui-sortable-handle">
           <h5>${listObj.title}</h5>
           <div class="cards sortable ui-sortable">
           </div>
@@ -81,11 +80,8 @@ function createList() {
           <form class="new_card" id="new_card" action="/cards" accept-charset="UTF-8" method="post">
             <input name="utf8" type="hidden" value="✓">
             <input value="${listObj.id}" type="hidden" name="card[list_id]" id="card_list_id">
-            <input placeholder="Add a card..." required="required" class="transparent-input card input" type="text" name="card[content]" id="card_content">
-          </form>
-        </div>
-        `
-      ))
+            <input placeholder="Add a card..." required="required" class="transparent-input card input" type="text" name="card[content]" id="card_content"></form></div>`
+      ));
       increaseWidth(listsColumn, 228)
     })
 
