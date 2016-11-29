@@ -6,8 +6,6 @@ $(document).on('ready', function() {
   getBoards();
 });
 
-
-
 function increaseWidth(elm, inc) {
   var width = parseInt(elm.style.width)
   elm.style.width = (width + inc) + 'px';
@@ -23,9 +21,9 @@ function createCard() {
     e.stopPropagation();
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
-    var form = $(this)
+    var form = $(this);
     $.post('/cards/', params).done(function(card) {
-      form.find('input[type=text]').val("")
+      form.find('input[type=text]').val("");
       // debugger
       //
       form.parent().find('.cards.sortable.ui-sortable').append($(
@@ -51,23 +49,22 @@ class List {
   }
 
   cardsCount() {
-    return this.cards.length
+    return this.cards.length;
   }
 }
 
 function createList() {
   // $("#new_board").off('submit').on("submit", (function(e) {
   $("#new_list").on("submit", (function(e) {
-    e.preventDefault() 
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
 
 
     $.post('/lists/', params).done(function(list) {
-      var listObj = new List(list)
-
-      $('#new_list input[type=text]').val("")
+      var listObj = new List(list);
+      $('#new_list input[type=text]').val("");
       
       var listsColumn = document.getElementById("lists-column");
       
@@ -76,15 +73,13 @@ function createList() {
           <h5>${listObj.title}</h5>
           <div class="cards sortable ui-sortable">
           </div>
-
           <form class="new_card" id="new_card" action="/cards" accept-charset="UTF-8" method="post">
             <input name="utf8" type="hidden" value="✓">
             <input value="${listObj.id}" type="hidden" name="card[list_id]" id="card_list_id">
             <input placeholder="Add a card..." required="required" class="transparent-input card input" type="text" name="card[content]" id="card_content"></form></div>`
       ));
-      increaseWidth(listsColumn, 228)
+      increaseWidth(listsColumn, 228);
     })
-
   }));
 }
 
@@ -92,8 +87,8 @@ function createList() {
 function createBoard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
   $("#new_board").on("submit", (function(e) {
-    e.preventDefault() 
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
 
@@ -102,14 +97,13 @@ function createBoard() {
       type: "POST",
       data :params,
       success: function(board) {
-        $('#board_name').val("")
+        $('#board_name').val("");
         $('#boards').prepend($(
         `<a href="/users/${board.user_id}/boards/${board.id}">
           <div class="board-tile four wide column" style="background: ${board.color}">
             <p>${board.name}</p>
           </div>
         </a>`).fadeIn('slow'))
-
       },
       error: function() {
        alert('error');
@@ -145,9 +139,8 @@ function getBoards() {
     $.ajax({
       url: "/boards/index", 
       type: 'GET'
-
     }).done(function(boards){
-      var len = boards.length 
+      var len = boards.length;
       for (var i = 0, len; i < len; i++) {
         var boardObj = new Board(boards[i].id, boards[i].name, boards[i].color, boards[i].user_id)
         $('#boards').prepend($(
