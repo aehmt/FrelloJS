@@ -27,7 +27,9 @@ class BoardsController < ApplicationController
 
   def create
     @board = current_user.boards.build(board_params)
-    render json: @board, status: 201
+    if @board.save
+      render json: @board, status: 201
+    end
   end
 
   def update

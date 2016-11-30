@@ -1,5 +1,5 @@
 class Board < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   has_many :lists
   has_many :feeds
   has_many :collaborators, through: :lists
