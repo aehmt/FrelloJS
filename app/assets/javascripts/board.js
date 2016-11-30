@@ -98,7 +98,6 @@ function createBoard() {
       type: "POST",
       data :params,
       success: function(board) {
-        e.preventDefault();
         $('#board_name').val("");
         $('#boards').prepend($(
         `<a href="/users/${board.user_id}/boards/${board.id}">
