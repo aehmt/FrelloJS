@@ -88,7 +88,7 @@ function createBoard() {
   // $("#new_board").off('submit').on("submit", (function(e) {
   $("#new_board").on("submit", (function(e) {
     e.preventDefault();
-    e.stopPropagation();
+    e.stopImmediatePropagation();
     // var board_name = $('#board_name').val()
     var params = $(this).serialize();
 
