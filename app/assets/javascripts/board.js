@@ -6,6 +6,7 @@ $(document).on('ready', function() {
   getBoards();
 });
 
+  var AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
 function increaseWidth(elm, inc) {
   var width = parseInt(elm.style.width)
   elm.style.width = (width + inc) + 'px';
