@@ -136,7 +136,7 @@ class Board {
 }
 
 function getBoards() {
-  if ($(location).attr('href') === "http://localhost:3000/") {
+  if (($(location).attr('href') === "http://localhost:3000/") || ($(location).attr('href') === "https://protected-coast-18057.herokuapp.com/")) {
     
     $.ajax({
       url: "/boards/index", 
