@@ -1,5 +1,5 @@
 // $(document).on('page:fetch', function() { 
-$(document).on('ready', function() {
+$(document).on('change', function() {
   function assignPositions() {
     var lists = $('#lists').find(".list").toArray();
     // debugger
